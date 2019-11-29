@@ -221,6 +221,11 @@ exports.data = async (req, res) => {
       addrData['balanceUSD'] = addrData.balance * latestPrice.quoteUSD;
     }
 
+    // console.log('addrData:', addrData);
+    // console.log('converting:', addrData.address);
+    // addrData.checksumAddress = web3.utils.toChecksumAddress(addrData.address);
+    // console.log('to:', addrData.checksumAddress);
+
     res.write(JSON.stringify(addrData));
     res.end();
   } else if ('block' in req.body) {

@@ -101,6 +101,9 @@ const normalizeTX = async (txData, receipt, blockData) => {
 **/
 var writeBlockToDB = function (config, blockData, flush) {
   const self = writeBlockToDB;
+  if (blockData && blockData.miner) {
+    blockData.miner = blockData.miner.toLowerCase();
+  }
   if (!self.bulkOps) {
     self.bulkOps = [];
   }
@@ -191,6 +194,10 @@ let getBlockReward = function(b) {
   Break transactions out of blocks and write to DB
 **/
 const writeTransactionsToDB = async (config, blockData, flush) => {
+  // console.log(blockData);
+  if (blockData && blockData.miner) {
+    blockData.miner = blockData.miner.toLowerCase();
+  }
   const self = writeTransactionsToDB;
   if (!self.bulkOps) {
     self.bulkOps = [];

@@ -4,6 +4,7 @@ require( './db' );
 
 const express = require('express');
 const path = require('path');
+const cors = require('cors');
 const favicon = require('serve-favicon');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
@@ -33,6 +34,7 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(cors({credentials: false, origin: true}));
 
 console.log('Using configuration:');
 console.log(config);

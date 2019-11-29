@@ -3,6 +3,7 @@
  * Tool for calculating richlist by hackyminer
  */
 
+require('../db.js');
 const _ = require('lodash');
 const Web3 = require('web3');
 const web3explorer = require('web3-explorer');
@@ -65,10 +66,10 @@ function makeRichList(toBlock, blocks, updateCallback) {
 
   asyncL.waterfall([
     function (callback) {
+      console.log('toBlock:', toBlock, ' fromBlock:', fromBlock);
       // Transaction.distinct("from", { blockNumber: { $lte: toBlock, $gt: fromBlock } }, function(err, docs) ...
       // faster
       // dictint("from")
-      console.log('Transaction aggregate:', Transaction);
       Transaction.aggregate([
         { $match: { blockNumber: { $lte: toBlock, $gt: fromBlock } } },
         { $group: { _id: '$from' } },
